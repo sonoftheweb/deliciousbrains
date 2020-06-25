@@ -10,3 +10,5 @@ In the root folder, do the following to install:
 1. Run `composer install`
 2. Run `npm install`
 3. Run `php artisan setup` to migrate, seed, install passport keys and link storage files.
+
+Note: I decided not to use Observers to update Balance as that invites some complexities which would require some more time to debug.
