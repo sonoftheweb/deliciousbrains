@@ -25,9 +25,9 @@ Route::middleware(['auth:api', 'throttle:60,1'])->prefix('v1')->group(function (
 
     Route::resource('application', 'Api\ApplicationController')->only(['index']);
 
-    Route::resource('users', 'Api\UserController');
+    Route::resource('users', 'Api\UserController')->only(['show']);
 
-    Route::resource('account-activity', 'Api\AccountActivityController');
+    Route::resource('account-activity', 'Api\AccountActivityController')->only(['store', 'update']);
 
 });
 

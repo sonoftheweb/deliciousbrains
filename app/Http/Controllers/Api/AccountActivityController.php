@@ -14,26 +14,6 @@ use Illuminate\Validation\ValidationException;
 class AccountActivityController extends Controller
 {
     /**
-     * Display a listing of the resource.
-     *
-     * @return Response
-     */
-    public function index()
-    {
-        //
-    }
-
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return Response
-     */
-    public function create()
-    {
-
-    }
-
-    /**
      * Store a newly created resource in storage.
      *
      * @param HandlesAccountActivity $accountActivity
@@ -50,28 +30,6 @@ class AccountActivityController extends Controller
     }
 
     /**
-     * Display the specified resource.
-     *
-     * @param AccountActivity $accountActivity
-     * @return Response
-     */
-    public function show(AccountActivity $accountActivity)
-    {
-        //
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param AccountActivity $accountActivity
-     * @return Response
-     */
-    public function edit(AccountActivity $accountActivity)
-    {
-        //
-    }
-
-    /**
      * Update the specified resource in storage.
      *
      * @param HandlesAccountActivity $activity
@@ -82,16 +40,5 @@ class AccountActivityController extends Controller
     public function update(HandlesAccountActivity $activity, AccountActivity $accountActivity)
     {
         $activity->updateActivity($accountActivity);
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param AccountActivity $accountActivity
-     * @return Response
-     */
-    public function destroy(AccountActivity $accountActivity)
-    {
-        //
     }
 }
