@@ -14,6 +14,24 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::middleware('auth:api')->get('/user', function (Request $request) {
-    return $request->user();
+Route::prefix('v1/public')->group(function () {
+
+    Route::resource('application', 'Api\ApplicationController')->only(['index']);
+    Route::post('login', 'Api\AuthenticateController@login');
+
+});
+
+Route::middleware(['auth:api', 'throttle:60,1'])->prefix('v1')->group(function () {
+
+    Route::resource('application', 'Api\ApplicationController')->only(['index']);
+
+    Route::resource('users', 'Api\UserController');
+
+    Route::resource('account-activity', 'Api\AccountActivityController');
+
+});
+
+Route::fallback(function(){
+    return response()->json([
+        'message' => 'No such resource...'], 404);
 });
