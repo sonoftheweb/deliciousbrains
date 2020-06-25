@@ -1,6 +1,6 @@
 <template>
     <v-layout fill-height>
-        <v-flex xs12 md6>
+        <v-flex xs12 md6 v-if="!authenticated">
             <div class="login-form">
                 <div class="spacer"></div>
                 <h2 class="thin font-weight-light mb-3">Login</h2>

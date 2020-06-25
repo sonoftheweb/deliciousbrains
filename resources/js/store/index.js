@@ -65,7 +65,7 @@ export default new Vuex.Store({
     getters: {
         authenticated: state => state.user.authenticated,
         user: state => state.user,
-        isLoggedIn: state => Object.prototype.hasOwnProperty.call(state.user, 'id'),
+        isLoggedIn: state => Object.prototype.hasOwnProperty.call(state.user, 'email'),
         needsUserData: state => {
             return !state.user.dataset && state.user.authenticated
         },

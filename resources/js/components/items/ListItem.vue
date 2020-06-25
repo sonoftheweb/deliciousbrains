@@ -64,10 +64,10 @@
                                 </v-row>
                             </v-form>
                         </v-card-text>
-                        <v-card-actions class="border-top py-7">
+                        <v-card-actions class="border-top py-5">
                             <v-spacer></v-spacer>
-                            <v-btn large class="info lighten-4 blue--text text--darken-3" depressed>Cancel</v-btn>
-                            <v-btn large class="info mr-5" depressed @click="updateItem(item)">Update entry</v-btn>
+                            <v-btn large class="info lighten-4 blue--text text--darken-3" @click="showEdit('activity_' + item.id + '_card', item)" depressed>Cancel</v-btn>
+                            <v-btn large class="info mr-1" depressed @click="updateItem(item)">Update entry</v-btn>
                         </v-card-actions>
                     </v-card>
 

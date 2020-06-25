@@ -4,7 +4,7 @@
         <v-app>
             <app-bar/>
             <v-main>
-                <v-container v-if="authenticated" fluid class="pa-0 white--text balance-area">
+                <v-container v-if="authenticated && isLoggedIn" fluid class="pa-0 white--text balance-area">
                     <balance-bar/>
                 </v-container>
                 <v-container fluid class="main pa-0" :class="containerClass()">
@@ -30,7 +30,7 @@
             BalanceBar
         },
         computed: {
-            ...mapGetters(['authenticated'])
+            ...mapGetters(['authenticated', 'isLoggedIn'])
         },
         data: () => ({
             alertData: {}
