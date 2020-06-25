@@ -12,3 +12,10 @@ In the root folder, do the following to install:
 3. Run `php artisan setup` to migrate, seed, install passport keys and link storage files.
 
 Note: I decided not to use Observers to update Balance as that invites some complexities which would require some more time to debug.
+
+
+#### Things I think should be done
+
+1. Make repository interfaces to further abstract the database layer.
+2. Work on Login.vue (make it a bit appealing)
+3. Capitalize observers for account balance
