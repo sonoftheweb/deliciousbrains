@@ -55,7 +55,8 @@ axios.interceptors.response.use(response => {
 })
 
 Vue.prototype.$http = axios
-Vue.prototype.$eventBus = $eventBus;
+Vue.prototype.$eventBus = $eventBus
+window.$ev = $eventBus
 Vue.prototype._ = lodash
 Vue.prototype.$modalMaxWidths = {
     alerts: '450px',

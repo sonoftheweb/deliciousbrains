@@ -9,7 +9,7 @@
                         <v-icon class="ml-0 mr-3">mdi-plus</v-icon>
                         Add Entry
                     </v-btn>
-                    <v-btn color="info">
+                    <v-btn color="info" @click="uploadActivities">
                         <v-icon class="ml-0 mr-3">mdi-upload</v-icon>
                         Import CSV
                     </v-btn>
@@ -53,12 +53,15 @@
             },
             addEntry() {
                 this.$eventBus.$emit('addEntry')
+            },
+            uploadActivities() {
+                this.$eventBus.$emit('uploadEntries')
             }
         },
 		mounted() {
-		    this.$eventBus.$on('accountBalance', (balanceData) => {
-		        this.balanceValue = balanceData.balance
-                this.balance = this.formatMoney(balanceData.balance) // from cents to dollars
+		    this.$eventBus.$on('accountBalance', (balance) => {
+		        this.balanceValue = balance
+                this.balance = this.formatMoney(balance) // from cents to dollars
             })
         }
     }

@@ -16,14 +16,14 @@ class UserResource extends JsonResource
     public function toArray($request)
     {
         $data = [
+            'id' => $this->id,
             'name' => $this->name,
             'email' => $this->email,
-            'profile' => $this->whenLoaded('profile'),
-            'account_balance' => $this->whenLoaded('accountBalance')
+            'profile' => $this->whenLoaded('profile')
         ];
 
         if (is_a($this->whenLoaded('accountActivity'), Collection::class)) {
-            $data['account_activity'] = AccountActivityResource::collection($this->accountActivity);
+            $data['account_activity'] = AccountActivity::collection($this->accountActivity);
         }
 
         return $data;

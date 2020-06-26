@@ -16,10 +16,6 @@ class UserController extends Controller
     protected $relationship_dependencies = [
         'details' => [
             'profile'
-        ],
-        'account-details' => [
-            'accountBalance',
-            'accountActivity'
         ]
     ];
 

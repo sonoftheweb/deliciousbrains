@@ -122,3 +122,9 @@ label.custom-label {
     text-transform: uppercase;
 }
 
+.csv-uploader {
+    .v-input__prepend-outer {
+        display: none !important;
+    }
+}
+

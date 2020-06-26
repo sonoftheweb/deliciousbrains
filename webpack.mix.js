@@ -13,8 +13,7 @@ require('vuetifyjs-mix-extension');
  |
  */
 
-mix
-    .copyDirectory('resources/images', 'public/images')
+mix.copyDirectory('resources/images', 'public/images')
     .copyDirectory('resources/fonts', 'public/fonts')
     .js('resources/js/app.js', 'public/js')
     .sass('resources/sass/app.scss', 'public/css')

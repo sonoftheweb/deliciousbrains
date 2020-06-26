@@ -69,6 +69,29 @@
             </v-card>
         </v-dialog>
 
+        <v-dialog v-model="upload" persistent max-width="800px">
+            <v-card elevation="0">
+                <v-card-title class="border-bottom py-7">
+                    <h4>Import Balance Entries</h4>
+                </v-card-title>
+                <v-card-text>
+                    <v-form>
+                        <v-row>
+                            <v-col cols="12" sm="12" md="12" lg="12">
+                                <label class="custom-label">CSV File</label>
+                                <v-file-input class="csv-uploader mt-3" accept=".csv" @change="selectFile" outlined></v-file-input>
+                            </v-col>
+                        </v-row>
+                    </v-form>
+                </v-card-text>
+                <v-card-actions class="border-top py-7">
+                    <v-spacer></v-spacer>
+                    <v-btn large class="info lighten-4 blue--text text--darken-3" @click="upload = false" depressed>Cancel</v-btn>
+                    <v-btn large class="info mr-5" depressed @click="uploadFile">Save entry</v-btn>
+                </v-card-actions>
+            </v-card>
+        </v-dialog>
+
     </div>
 </template>
 
@@ -88,6 +111,7 @@
 		    return {
 		        groupedEvents: null,
                 add: false,
+                upload: false,
                 datetimeField: {
 		            dateTime: new Date(),
                     fieldProps: {
@@ -99,7 +123,8 @@
                 },
                 description: null,
                 amount: null,
-                days: null
+                days: null,
+                file: null
             }
         },
         methods: {
@@ -150,6 +175,23 @@
                     this.add = false
                     this.$eventBus.$emit('refresh')
                 })
+            },
+            selectFile(file) {
+                this.file = file
+            },
+            uploadFile() {
+                let formData = new FormData();
+                formData.append('file', this.file);
+                formData.append('user_id', this.user.id)
+
+                this.$http.post('/api/v1/account-activity', formData).then(response => {
+                    this.$eventBus.$emit('alert', {
+                        status: 'success',
+                        message: 'Operation successful'
+                    })
+
+                    this.upload = false;
+                })
             }
         },
         mounted() {
@@ -159,6 +201,10 @@
 
             this.$eventBus.$on('addEntry', () => {
                 this.add = true
+            })
+
+            this.$eventBus.$on('uploadEntries', () => {
+                this.upload = true
             })
         }
     }
