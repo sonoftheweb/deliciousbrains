@@ -18,7 +18,6 @@ class UserController extends Controller
             'profile'
         ],
         'account-details' => [
-            'accountBalance',
             'accountActivity'
         ]
     ];

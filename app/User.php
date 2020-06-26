@@ -3,7 +3,6 @@
 namespace App;
 
 use App\Models\AccountActivity;
-use App\Models\AccountBalance;
 use App\Models\UserProfile;
 use Carbon\Carbon;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
@@ -48,11 +47,6 @@ class User extends Authenticatable
         return $this->hasOne(UserProfile::class, 'user_id', 'id');
     }
 
-    public function accountBalance()
-    {
-        return $this->hasOne(AccountBalance::class, 'user_id', 'id');
-    }
-
     public function accountActivity()
     {
         return $this->hasMany(AccountActivity::class, 'user_id', 'id');
@@ -67,24 +61,12 @@ class User extends Authenticatable
             'amount' => $amount * 100, // we are dealing in cents here
             'activity_date' => $date
         ]);
-
-        if (!$accountBalance = $this->accountBalance()->first()) {
-            $this->accountBalance()->create([
-                'balance' => $amount * 100,
-            ]);
-        }
-        else {
-            $accountBalance->balance = $accountBalance->balance + ($amount * 100);
-            $accountBalance->save();
-        }
     }
 
     public function updateActivity(Request $request)
     {
 
         $activity = $this->accountActivity()->find($request->id);
-
-        $initialActivityAmount = $activity->amount;
 
         $input = $request->except(['id']);
 
@@ -95,13 +77,5 @@ class User extends Authenticatable
         $activity->description = $input['description'];
 
         $activity->save();
-
-        $balDiff = (int) $activity->amount - (int) $initialActivityAmount;
-
-        $accountBalance = $this->accountBalance()->first();
-
-        $accountBalance->balance = $accountBalance->balance + $balDiff;
-
-        $accountBalance->save();
     }
 }

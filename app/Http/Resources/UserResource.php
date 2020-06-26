@@ -18,8 +18,7 @@ class UserResource extends JsonResource
         $data = [
             'name' => $this->name,
             'email' => $this->email,
-            'profile' => $this->whenLoaded('profile'),
-            'account_balance' => $this->whenLoaded('accountBalance')
+            'profile' => $this->whenLoaded('profile')
         ];
 
         if (is_a($this->whenLoaded('accountActivity'), Collection::class)) {
