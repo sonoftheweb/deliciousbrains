@@ -1,1 +1,130 @@
-//
+@font-face {
+    font-family: SFProRounded;
+    src: url("../fonts/SF-Pro-Rounded-Black.otf") format("opentype");
+    font-weight: 900;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: SFProRounded;
+    src: url("../fonts/SF-Pro-Rounded-Heavy.otf") format("opentype");
+    font-weight: 800;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: SFProRounded;
+    src: url("../fonts/SF-Pro-Rounded-Bold.otf") format("opentype");
+    font-weight: 700;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: SFProRounded;
+    src: url("../fonts/SF-Pro-Rounded-Semibold.otf") format("opentype");
+    font-weight:600;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: SFProRounded;
+    src: url("../fonts/SF-Pro-Rounded-Medium.otf") format("opentype");
+    font-weight: 500;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: SFProRounded;
+    src: url("../fonts/SF-Pro-Rounded-Regular.otf") format("opentype");
+    font-weight: 400;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: SFProRounded;
+    src: url("../fonts/SF-Pro-Rounded-Light.otf") format("opentype");
+    font-weight: 200;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: SFProRounded;
+    src: url("../fonts/SF-Pro-Rounded-Thin.otf") format("opentype");
+    font-weight:300;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: SFProRounded;
+    src: url("../fonts/SF-Pro-Rounded-Ultralight.otf") format("opentype");
+    font-weight:100;
+    font-style: normal;
+}
+
+.body {
+    background: grey;
+}
+
+.main.container {
+    max-width: 1400px !important;
+    margin: 0 auto;
+}
+
+.v-main__wrap {
+    background: #f5f6fa !important;
+}
+
+.login-form {
+    max-width: 400px;
+    margin: 0 auto;
+    height: 100%;
+
+    .spacer {
+        height: calc(35% - 50px);
+    }
+}
+
+.balance-area {
+    background: #192b4e;
+
+    .balance {
+        font-size: 40px;
+
+        .smaller {
+            font-size: 20px;
+        }
+    }
+}
+
+.day-group {
+    margin-top: 30px !important;
+    margin-bottom: 50px !important;
+
+    .amount {
+        font-size: 20px;
+    }
+}
+
+.border-bottom {
+    border-bottom: 1px solid rgba(0, 0, 0, 0.11);
+}
+
+.border-top {
+    border-top: 1px solid rgba(0, 0, 0, 0.11);
+}
+
+/* since we are not using vuetify's inbuilt labels */
+
+label.custom-label {
+    font-size: 15px;
+    font-weight: bold;
+    color: rgba(0, 0, 0, 0.64);
+    text-transform: uppercase;
+}
+
+.csv-uploader {
+    .v-input__prepend-outer {
+        display: none !important;
+    }
+}
+
