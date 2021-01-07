@@ -1,28 +1,63 @@
-window._ = require('lodash');
+import Vue from 'vue'
+import lodash from 'lodash'
+import axios from 'axios'
+import Cookies from 'js-cookie'
+import router from './router/router'
+import store from './store/index'
 
-/**
- * We'll load the axios HTTP library which allows us to easily issue requests
- * to our Laravel back-end. This library automatically handles sending the
- * CSRF token as a header based on the value of the "XSRF" token cookie.
- */
+const $eventBus = new Vue();
 
-window.axios = require('axios');
+axios.defaults.baseURL = process.env.MIX_APP_URL
+axios.defaults.headers.common['X-Requested-With'] = 'XMLHttpRequest'
+axios.defaults.withCredentials = true
 
-window.axios.defaults.headers.common['X-Requested-With'] = 'XMLHttpRequest';
+axios.interceptors.request.use(config => {
+    // when a request is sent
+    $eventBus.$emit('toggle-loading', true)
 
-/**
- * Echo exposes an expressive API for subscribing to channels and listening
- * for events that are broadcast by Laravel. Echo and event broadcasting
- * allows your team to easily build robust real-time web applications.
- */
+    // If token exist as a cookie add it to request
+    if (Cookies.get('token')) {
+        config.headers.common['Authorization'] = 'Bearer ' + Cookies.get('token')
+    }
 
-// import Echo from 'laravel-echo';
+    return config
+}, error => {
+    return Promise.reject(error)
+})
 
-// window.Pusher = require('pusher-js');
+axios.interceptors.response.use(response => {
 
-// window.Echo = new Echo({
-//     broadcaster: 'pusher',
-//     key: process.env.MIX_PUSHER_APP_KEY,
-//     cluster: process.env.MIX_PUSHER_APP_CLUSTER,
-//     forceTLS: true
-// });
+    $eventBus.$emit('toggle-loading', false )
+
+    return response
+
+}, error => {
+
+    $eventBus.$emit('toggle-loading', false )
+
+    let data = error.response.data
+
+    if (error.response.status === 401) {
+
+        store.dispatch('loggedOut').then(() => {
+            window.location.replace("/login")
+        })
+
+        return
+    }
+
+    $eventBus.$emit({
+        status: 'error',
+        message: 'Unexpected error encountered. This issue has been logged.'
+    })
+
+    return Promise.reject(error)
+})
+
+Vue.prototype.$http = axios
+Vue.prototype.$eventBus = $eventBus;
+Vue.prototype._ = lodash
+Vue.prototype.$modalMaxWidths = {
+    alerts: '450px',
+    messages: '600px'
+}
